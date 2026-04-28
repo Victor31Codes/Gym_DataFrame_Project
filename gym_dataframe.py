@@ -32,10 +32,27 @@ print("The age of the youngest person training on the gym is:", min_value,"years
 max_value = df_gym_attendance['workout_duration_minutes'].max()
 print("The highest time that a person takes training in minutes is:", max_value,"minutes")
 
+#We are gonna get the specific value of the membership_type using the member_id with the get() function
 mem = df_gym_attendance['membership_type']
 member_id = df_gym_attendance["member_id"]
-annual_membership = mem.get(member_id)
+annual_membership = mem.get(member_id[51])
 print(df_gym_attendance)
 print(annual_membership)
 
+#iloc and loc usage on the dataframe
+
+first_row = df_gym_attendance.iloc[0]
+print("Accessing to the first info on the DataFrame\n", first_row)#This is with iloc
+
+fifth_row = df_gym_attendance.loc[5]
+print("Accessing to the first info on the DataFrame\n", fifth_row)#This is with loc
+
+row_0_to_5 = df_gym_attendance.iloc[:6]
+print("Accessing to the row 0 to 5 info on the DataFrame\n", row_0_to_5)#This is with iloc
+
+row_0_to_5 = df_gym_attendance.loc[:5]
+print("Accessing to the row 0 to 5 info on the DataFrame\n", row_0_to_5)#This is with loc
+
+cardio_info = df_gym_attendance.loc[:,['member_id','workout_type']]
+print("We are gonna filter the all rows just for two columns\n",cardio_info)
 
