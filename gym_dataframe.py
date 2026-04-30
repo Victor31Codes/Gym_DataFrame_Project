@@ -56,3 +56,29 @@ print("Accessing to the row 0 to 5 info on the DataFrame\n", row_0_to_5)#This is
 cardio_info = df_gym_attendance.loc[:,['member_id','workout_type']]
 print("We are gonna filter the all rows just for two columns\n",cardio_info)
 
+
+#Identify the nulls on the DataFrame
+checking_nulls = df_gym_attendance.isna().sum()
+print("The columns that are null are the following ones:\n", checking_nulls)
+
+#Refilling with mean on the null spaces (there is no null spaces)
+mean_calories_burned = df_gym_attendance["calories_burned"].mean()
+refill_mean_spaces = df_gym_attendance["calories_burned"].fillna(median_calories_burned)
+print("The new column calories burned with the filled spaces with the mean\n", refill_mean_spaces)
+
+
+#Creating new columns with new values
+print(df_gym_attendance.info())
+
+df_gym_attendance['visit_date'] = pd.to_datetime(df_gym_attendance['visit_date'])
+print(df_gym_attendance.info())
+
+df_gym_attendance['calories_per_min'] = df_gym_attendance['calories_burned'] / df_gym_attendance['workout_duration_minutes']
+print(df_gym_attendance)
+
+df_gym_attendance['intensity'] = df_gym_attendance['calories_burned'].apply(lambda x: 'Low' if x < 200 else 'Medium' if x < 400 else 'High')
+print(df_gym_attendance)
+
+max_cal = df_gym_attendance['calories_burned'].max()
+df_gym_attendance['performance_pct'] = (df_gym_attendance['calories_burned'] / max_cal) * 100
+print(df_gym_attendance)
