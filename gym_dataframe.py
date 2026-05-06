@@ -82,3 +82,22 @@ print(df_gym_attendance)
 max_cal = df_gym_attendance['calories_burned'].max()
 df_gym_attendance['performance_pct'] = (df_gym_attendance['calories_burned'] / max_cal) * 100
 print(df_gym_attendance)
+
+workout_type_counts = df_gym_attendance['workout_type'].value_counts()
+print(workout_type_counts) #Counting the number of occurrences of each unique value in the 'Workout_Type' column
+
+workout_type_groups = df_gym_attendance.groupby('workout_type')['workout_duration_minutes'].sum()
+print(workout_type_groups) #Grouping the DataFrame by 'workout_type' and calculating the sum of 'workout_duration_minutes ' for each group
+
+workout_type_stats = df_gym_attendance.groupby('workout_type')['calories_burned'].agg(['mean','sum'])
+print(workout_type_stats) #Grouping the DataFrame by 'workout_type' and calculating the mean, min, and max of 'calorues_burned' for each group
+
+workout_type_age_group = df_gym_attendance.groupby(['workout_type','age'])['calories_burned'].sum()
+print(workout_type_age_group)
+
+def total_revenue_calories(group):
+    return(group['workout_duration_minutes'] * group['calories_per_min'])
+
+
+revenue_workout_duration_calories = df_gym_attendance.groupby('workout_type').apply(total_revenue_calories)
+print(revenue_workout_duration_calories)
