@@ -1,6 +1,6 @@
 import pandas as pd
 
-path = r'C:\Users\Manolo\OneDrive\Documentos\Gym_DataFrame_Project\daily_gym_attendance_workout_data.csv'
+path = r'C:\Users\vtorr\OneDrive\Documentos\Gym_DataFrame_Project\daily_gym_attendance_workout_data.csv'
 df_gym_attendance = pd.read_csv(path)
 
 print(df_gym_attendance.head())
@@ -101,3 +101,12 @@ def total_revenue_calories(group):
 
 revenue_workout_duration_calories = df_gym_attendance.groupby('workout_type').apply(total_revenue_calories)
 print(revenue_workout_duration_calories)
+
+high_intensity = df_gym_attendance[(df_gym_attendance['intensity'] == 'High') & (df_gym_attendance['gender'] == 'Male')]
+print(high_intensity) #Filtering by gender = Male & The intensity = High.
+
+visit_date_july_2024 = df_gym_attendance[(df_gym_attendance['visit_date'].dt.year == 2024) & (df_gym_attendance['visit_date'].dt.month == 7)]
+print(visit_date_july_2024) #Filtering by year = 2024 $ the month = July(07)
+
+best_performance = df_gym_attendance[df_gym_attendance['performance_pct'] > 95]
+print(best_performance)
