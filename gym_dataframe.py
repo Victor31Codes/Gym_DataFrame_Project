@@ -110,3 +110,6 @@ print(visit_date_july_2024) #Filtering by year = 2024 $ the month = July(07)
 
 best_performance = df_gym_attendance[df_gym_attendance['performance_pct'] > 95]
 print(best_performance)
+
+pivot_table_calories_burned = pd.pivot_table(df_gym_attendance, values = 'calories_burned', index = 'member_id', columns = 'workout_type', aggfunc= 'sum' )
+print(pivot_table_calories_burned)
