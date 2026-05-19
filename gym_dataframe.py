@@ -113,3 +113,17 @@ print(best_performance)
 
 pivot_table_calories_burned = pd.pivot_table(df_gym_attendance, values = 'calories_burned', index = 'member_id', columns = 'workout_type', aggfunc= 'sum' )
 print(pivot_table_calories_burned)
+
+#Filter by datetime
+print(df_gym_attendance.info())
+
+df_gym_attendance.set_index('visit_date', inplace=True)
+
+df_gym_attendance.sort_index(inplace=True)
+
+df_gym_attendance['Year'] =df_gym_attendance.index.year
+df_gym_attendance['Month'] =df_gym_attendance.index.month
+df_gym_attendance['Day'] =df_gym_attendance.index.day
+
+df_gym_attendance_2024_august = df_gym_attendance.loc['2024-08-01':'2024-08-31']
+print(df_gym_attendance_2024_august)
